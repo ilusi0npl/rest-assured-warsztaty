@@ -1,4 +1,4 @@
-package io.swagger.petstore.test.basic.http;
+package io.swagger.petstore.test.chapter1.basic.http;
 
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
