@@ -1,51 +1,50 @@
 package io.swagger.pet.store.tests.chapter2.assertions.assertj.specific.generated;
 
 import io.swagger.main.pojo.Pet;
+import io.swagger.pet.store.tests.generated.assertions.BddAssertions;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static io.swagger.pet.store.tests.generated.assertions.Assertions.assertThat;
 
 public class GeneratedAssertionsExample {
 
     @Test
-    public void getTest() {
+    public void generatedAssertionsTest() {
+        Pet createdPet = new Pet();
+        createdPet.setId(123123L);
+        createdPet.setName("Thorgal");
+        createdPet.setStatus("available");
+
         given()
                 .log()
                 .all()
                 .contentType("application/json")
                 .accept("application/json")
-                .body("{\n" +
-                        "  \"id\": 3123,\n" +
-                        "  \"category\": {\n" +
-                        "    \"id\": 0,\n" +
-                        "    \"name\": \"string\"\n" +
-                        "  },\n" +
-                        "  \"name\": \"Burek\",\n" +
-                        "  \"photoUrls\": [\n" +
-                        "    \"string\"\n" +
-                        "  ],\n" +
-                        "  \"tags\": [\n" +
-                        "    {\n" +
-                        "      \"id\": 0,\n" +
-                        "      \"name\": \"string\"\n" +
-                        "    }\n" +
-                        "  ],\n" +
-                        "  \"status\": \"available\"\n" +
-                        "}")
+                .body(createdPet)
                 .post("https://petstore.swagger.io/v2/pet")
-                .then().assertThat().statusCode(200)
-                .extract().response();
+                .then().assertThat().statusCode(200);
 
-        Pet pet = given()
+        Pet getPet = given()
                 .log()
                 .all()
                 .contentType("application/json")
                 .accept("application/json")
-                .pathParam("petId", "3123")
+                .pathParam("petId", createdPet.getId())
                 .get("https://petstore.swagger.io/v2/pet/{petId}")
                 .then().assertThat().statusCode(200).extract().body().as(Pet.class);
-        System.out.println("RESPONSE WAS");
-        System.out.println(pet);
+
+        assertThat(getPet)
+                .hasId(createdPet.getId())
+                .hasName(createdPet.getName())
+                .hasStatus(createdPet.getStatus());
+
+        assertThat(getPet).isEqualToComparingFieldByField(createdPet);
+
+        BddAssertions.then(getPet)
+                .hasId(createdPet.getId())
+                .hasName(createdPet.getName())
+                .hasStatus(createdPet.getStatus());
     }
 
 
