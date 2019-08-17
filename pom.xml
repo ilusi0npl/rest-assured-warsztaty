@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>${rest-assured.version}</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
     <groupId>rest-api-example</groupId>
     <artifactId>petstore-tests</artifactId>
@@ -59,6 +59,28 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
+                <version>2.1.0</version>
+                <configuration>
+                    <packages>
+                        <param>io.swagger.pojo</param>
+                    </packages>
+                    <!--                    <classes>-->
+                    <!--                        <param>io.swagger.pojo.Category</param>-->
+                    <!--                        <param>io.swagger.pojo.Pet</param>-->
+                    <!--                        <param>io.swagger.pojo.Tag</param>-->
+                    <!--                    </classes>-->
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.assertj</groupId>
+                        <artifactId>assertj-core</artifactId>
+                        <version>${assertj-core.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
