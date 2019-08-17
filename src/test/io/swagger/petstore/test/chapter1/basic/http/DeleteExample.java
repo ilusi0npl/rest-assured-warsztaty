@@ -14,7 +14,7 @@ public class DeleteExample {
                 .all()
                 .contentType("application/json")
                 .accept("application/json")
-                .pathParam("petId", "8315298304486418000")
+                .pathParam("petId", "123")
                 .delete("https://petstore.swagger.io/v2/pet/{petId}")
                 .then().assertThat().statusCode(200).extract().response();
         System.out.println("RESPONSE WAS");

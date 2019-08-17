@@ -15,7 +15,7 @@ public class PutExample {
                 .contentType("application/json")
                 .accept("application/json")
                 .body("{\n" +
-                        "  \"id\": 8315298304486418000,\n" +
+                        "  \"id\": 123,\n" +
                         "  \"category\": {\n" +
                         "    \"id\": 0,\n" +
                         "    \"name\": \"string\"\n" +
@@ -32,7 +32,7 @@ public class PutExample {
                         "  ],\n" +
                         "  \"status\": \"available\"\n" +
                         "}")
-                .post("https://petstore.swagger.io/v2/pet")
+                .put("https://petstore.swagger.io/v2/pet")
                 .then().assertThat().statusCode(200).extract().response();
         System.out.println("RESPONSE WAS");
         System.out.println(response.prettyPrint());

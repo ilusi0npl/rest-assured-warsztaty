@@ -18,7 +18,7 @@ public class JsonPathTest {
                 .contentType("application/json")
                 .accept("application/json")
                 .body("{\n" +
-                        "  \"id\": 8315298304486418000,\n" +
+                        "  \"id\": 123,\n" +
                         "  \"category\": {\n" +
                         "    \"id\": 0,\n" +
                         "    \"name\": \"string\"\n" +
