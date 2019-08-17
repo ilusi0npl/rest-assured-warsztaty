@@ -61,18 +61,38 @@
                 </configuration>
             </plugin>
             <plugin>
+                <!--                To generate assertions mvn assertj:generate-assertions-->
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
                 <version>2.1.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate-assertions</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
                     <packages>
-                        <param>io.swagger.pojo</param>
+                        <param>io.swagger.main.pojo</param>
                     </packages>
-                    <!--                    <classes>-->
-                    <!--                        <param>io.swagger.pojo.Category</param>-->
-                    <!--                        <param>io.swagger.pojo.Pet</param>-->
-                    <!--                        <param>io.swagger.pojo.Tag</param>-->
-                    <!--                    </classes>-->
+
+                    <!-- Whether generated assertions classes can be inherited with consistent assertion chaining -->
+                    <hierarchical>true</hierarchical>
+
+                    <!--
+                      If true, generate assertions for all fields whatever their visibility is (including private).
+                      Default to false which means assertions are only generated for public fields.
+                    -->
+                    <generateAssertionsForAllFields>true</generateAssertionsForAllFields>
+
+                    <!--                    Configuration of custom assertions-->
+                    <entryPointClassPackage>
+                        io.swagger.pet.store.tests.generated.assertions
+                    </entryPointClassPackage>
+                    <generatedSourcesScope>compile</generatedSourcesScope>
+                    <cleanTargetDir>true</cleanTargetDir>
+
                 </configuration>
                 <dependencies>
                     <dependency>
