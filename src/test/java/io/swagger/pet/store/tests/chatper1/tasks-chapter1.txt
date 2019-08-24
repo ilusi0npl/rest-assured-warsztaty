@@ -1,0 +1,13 @@
+Zadania:
+
+#1
+Utwórz test który dla ścieżki URI /pet wywoła metodę POST
+
+#2
+Utwórz test który dla ścieżki URI​/pet/{petId} wywoła metodę GET
+
+#3
+Utwórz test który dla ścieżki URI /pet wywoła metodę PUT
+
+#4
+Utwórz test który dla ścieżki URI​/pet/{petId} wywoła metodę DELETE

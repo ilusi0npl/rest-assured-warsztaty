@@ -1,0 +1,20 @@
+Zadania:
+
+#1
+
+1. Utwórz obiekt odpowiadający obiektowi Pet
+2. Utwórz w bazie nowego zwierzaka wykorzystując
+3. Sprawdź czy obiekt jest dostępny.
+4. Wykorzytuj asercji dostępne tylko z RestAssured
+
+#2
+
+Utwórz klasę StatusCodeAssertions i ją wykorzystaj w testach
+
+Dokumentacja dostępna pod adresem: https://joel-costigliola.github.io/assertj/assertj-core-custom-assertions.html
+
+#3
+
+Wygeneruj asercje przy użyciu biblioteki AssertJ dla obiektu Pet
+Wykorzystaj wygenerowane asercje w testach.
+
