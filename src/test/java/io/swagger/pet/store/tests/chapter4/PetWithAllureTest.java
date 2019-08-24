@@ -16,7 +16,6 @@ public class PetWithAllureTest {
 
     private Employee employee;
 
-
     @BeforeMethod
     public void beforeMethod() {
         employee = new Employee();
