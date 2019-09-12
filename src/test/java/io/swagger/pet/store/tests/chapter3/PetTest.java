@@ -85,7 +85,7 @@ public class PetTest {
     }
 
     @Test(priority = 9999)
-    public void deletePet() {
+    public void deletePetTest() {
         Pet pet = getPet();
         api.addPet().body(pet.status(PENDING)).execute(validatedWith(shouldBeCode(SC_OK)));
         api.deletePet().petIdPath(pet.getId()).execute(validatedWith(shouldBeCode(SC_OK)));

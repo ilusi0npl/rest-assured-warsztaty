@@ -1,5 +1,6 @@
 package io.swagger.pet.store.tests.chapter2.xml.path;
 
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -12,6 +13,7 @@ public class XmlPathTest {
         Response response = given()
                 .log()
                 .all()
+                .filter(new ResponseLoggingFilter())
                 .contentType("application/xml")
                 .accept("application/xml")
                 .body("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -37,13 +39,12 @@ public class XmlPathTest {
                 .then().assertThat().statusCode(200)
                 .extract().response();
 
-        System.out.println("RESPONSE WAS");
-        System.out.println(response.prettyPrint());
         long petId = response.xmlPath().getLong("pet.id");
 
         given()
                 .log()
                 .all()
+                .filter(new ResponseLoggingFilter())
                 .contentType("application/json")
                 .accept("application/json")
                 .pathParam("petId", petId)

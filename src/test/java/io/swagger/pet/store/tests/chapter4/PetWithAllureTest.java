@@ -22,8 +22,8 @@ public class PetWithAllureTest {
     }
 
     @Test
-    @Description("The goal of this test is to add pet as employee and check if it exist")
-    public void asEmployeeAddPetDatabaseAndCheckIfIsPresentTest() {
+    @Description("The goal of this test is to add pet as employee and check if it present")
+    public void asEmployeeAddPetAndCheckIfIsPresentTest() {
         Pet initialPet = getPet();
         employee.addAddPet(initialPet);
         Pet actualPet = employee.getPet(initialPet);

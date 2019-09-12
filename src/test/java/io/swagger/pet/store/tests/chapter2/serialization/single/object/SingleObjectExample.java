@@ -44,8 +44,6 @@ public class SingleObjectExample {
                 .pathParam("petId", "3123")
                 .get("https://petstore.swagger.io/v2/pet/{petId}")
                 .then().assertThat().statusCode(200).extract().body().as(Pet.class);
-        System.out.println("RESPONSE WAS");
-        System.out.println(pet);
     }
 
 

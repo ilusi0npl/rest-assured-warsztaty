@@ -1,5 +1,6 @@
 package io.swagger.pet.store.tests.chatper1;
 
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -12,6 +13,7 @@ public class PostExample {
         Response response = given()
                 .log()
                 .all()
+                .filter(new ResponseLoggingFilter())
                 .contentType("application/json")
                 .accept("application/json")
                 .body("{\n" +
@@ -34,8 +36,6 @@ public class PostExample {
                         "}")
                 .post("https://petstore.swagger.io/v2/pet")
                 .then().assertThat().statusCode(200).extract().response();
-        System.out.println("RESPONSE WAS");
-        System.out.println(response.prettyPrint());
     }
 
 

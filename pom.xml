@@ -78,6 +78,12 @@
             <artifactId>allure-testng</artifactId>
             <version>2.12.1</version>
         </dependency>
+        <!-- Logger -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.12.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -126,13 +132,6 @@
                     <cleanTargetDir>true</cleanTargetDir>
 
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.assertj</groupId>
-                        <artifactId>assertj-core</artifactId>
-                        <version>3.11.1</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
             <!--Generating swagger-->

@@ -39,12 +39,13 @@ public class GeneratedAssertionsExample {
                 .hasName(createdPet.getName())
                 .hasStatus(createdPet.getStatus());
 
-        assertThat(getPet).isEqualToComparingFieldByField(createdPet);
-
         BddAssertions.then(getPet)
                 .hasId(createdPet.getId())
                 .hasName(createdPet.getName())
                 .hasStatus(createdPet.getStatus());
+
+
+
     }
 
 

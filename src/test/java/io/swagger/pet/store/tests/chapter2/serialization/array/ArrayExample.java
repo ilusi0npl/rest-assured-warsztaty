@@ -1,5 +1,6 @@
 package io.swagger.pet.store.tests.chapter2.serialization.array;
 
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.swagger.pet.store.tests.chapter2.serialization.single.object.pojo.Pet;
 import org.testng.annotations.Test;
 
@@ -15,6 +16,7 @@ public class ArrayExample {
         Pet[] arrayOfPets = given()
                 .log()
                 .all()
+                .filter(new ResponseLoggingFilter())
                 .contentType("application/json")
                 .accept("application/json")
                 .queryParam("status", "sold")

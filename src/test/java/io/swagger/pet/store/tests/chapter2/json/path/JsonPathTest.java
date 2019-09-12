@@ -1,5 +1,6 @@
 package io.swagger.pet.store.tests.chapter2.json.path;
 
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
@@ -17,6 +18,7 @@ public class JsonPathTest {
                 .all()
                 .contentType("application/json")
                 .accept("application/json")
+                .filter(new ResponseLoggingFilter())
                 .body("{\n" +
                         "  \"id\": 123,\n" +
                         "  \"category\": {\n" +
@@ -39,8 +41,6 @@ public class JsonPathTest {
                 .then().assertThat().statusCode(200)
                 .extract().response();
 
-        System.out.println("RESPONSE WAS");
-        System.out.println(response.prettyPrint());
         long petId = response.jsonPath().getLong("id");
 
         given()
