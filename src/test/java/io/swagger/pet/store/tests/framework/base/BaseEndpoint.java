@@ -1,4 +1,4 @@
-package io.swagger.pet.store.tests.framework;
+package io.swagger.pet.store.tests.framework.base;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -9,7 +9,6 @@ import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.Response;
 import io.swagger.petstore.GsonObjectMapper;
-import org.apache.http.HttpStatus;
 
 import java.lang.reflect.Type;
 import java.util.Arrays;
@@ -17,13 +16,15 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings("unchecked")
-public abstract class BaseEndpoint<T extends BaseEndpoint, M> {
+public abstract class BaseEndpoint<Endpoint, Model> {
 
     protected Response response;
 
     protected abstract Type getModelType();
 
-    public abstract T sendRequest();
+    public abstract Endpoint sendRequest();
+
+    protected abstract int getSuccessStatusCode();
 
     protected RequestSpecBuilder getRequestSpecBuilder() {
         return new RequestSpecBuilder().setConfig(RestAssured.config()
@@ -35,23 +36,19 @@ public abstract class BaseEndpoint<T extends BaseEndpoint, M> {
                         new ResponseLoggingFilter()));
     }
 
-    public T assertRequestSuccess() {
+    public Endpoint assertRequestSuccess() {
         return assertStatusCode(getSuccessStatusCode());
     }
 
-    public T assertStatusCode(int statusCode) {
+    public Endpoint assertStatusCode(int statusCode) {
         checkForRequestNotNull();
-        assertThat(response.getStatusCode()).isEqualTo(statusCode);
-        return (T) this;
+        assertThat(response.getStatusCode()).as("Status code").isEqualTo(statusCode);
+        return (Endpoint) this;
     }
 
-    public M getModel() {
+    public Model getResponseAsModelObject() {
         checkForRequestNotNull();
-        return (M) response.as(getModelType());
-    }
-
-    protected int getSuccessStatusCode() {
-        return HttpStatus.SC_OK;
+        return (Model) response.as(getModelType());
     }
 
     protected void checkForRequestNotNull() {
