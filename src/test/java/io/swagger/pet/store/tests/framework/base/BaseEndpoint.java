@@ -31,6 +31,7 @@ public abstract class BaseEndpoint<Endpoint, Model> {
                 .objectMapperConfig(ObjectMapperConfig.objectMapperConfig().defaultObjectMapper(GsonObjectMapper.gson()))
                 .redirect(RedirectConfig.redirectConfig().followRedirects(false))
                 .sslConfig(SSLConfig.sslConfig().relaxedHTTPSValidation()))
+                .setBaseUri("http://petstore.swagger.io:80/v2")
                 .addFilters(Arrays.asList(
                         new RequestLoggingFilter(),
                         new ResponseLoggingFilter()));
@@ -46,7 +47,7 @@ public abstract class BaseEndpoint<Endpoint, Model> {
         return (Endpoint) this;
     }
 
-    public Model getResponseAsModelObject() {
+    public Model getResponseModel() {
         checkForRequestNotNull();
         return (Model) response.as(getModelType());
     }

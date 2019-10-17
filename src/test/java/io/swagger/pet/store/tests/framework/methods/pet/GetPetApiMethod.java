@@ -1,4 +1,4 @@
-package io.swagger.pet.store.tests.framework.endpoints.pet;
+package io.swagger.pet.store.tests.framework.methods.pet;
 
 import io.swagger.pet.store.tests.framework.client.PetApiClient;
 import io.swagger.petstore.model.Pet;

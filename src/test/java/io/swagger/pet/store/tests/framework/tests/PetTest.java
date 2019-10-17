@@ -1,8 +1,8 @@
 package io.swagger.pet.store.tests.framework.tests;
 
 import io.swagger.pet.store.tests.chapter4.TestUtils;
-import io.swagger.pet.store.tests.framework.endpoints.pet.GetPetApiMethod;
-import io.swagger.pet.store.tests.framework.endpoints.pet.PostPetApiMethod;
+import io.swagger.pet.store.tests.framework.methods.pet.GetPetApiMethod;
+import io.swagger.pet.store.tests.framework.methods.pet.PostPetApiMethod;
 import io.swagger.petstore.model.Category;
 import io.swagger.petstore.model.Pet;
 import org.testng.annotations.Test;
@@ -21,9 +21,9 @@ public class PetTest {
         getPetApiMethod.sendRequest();
         getPetApiMethod.assertRequestSuccess();
         getPetApiMethod.assertStatusCode(200);
-        Pet pet = getPetApiMethod.getResponseAsModelObject();
+        Pet pet = getPetApiMethod.getResponseModel();
 
-        assertThat(pet.getId()).isEqualTo("123");
+        assertThat(pet.getId()).isEqualTo(123L);
     }
 
     @Test
@@ -34,8 +34,7 @@ public class PetTest {
         postPetApiMethod.setPet(petToBeAdded);
         postPetApiMethod.sendRequest();
         postPetApiMethod.assertRequestSuccess();
-        postPetApiMethod.assertStatusCode(200);
-        Pet createdPet = postPetApiMethod.getResponseAsModelObject();
+        Pet createdPet = postPetApiMethod.getResponseModel();
 
         assertThat(createdPet.getId()).isEqualTo(petToBeAdded.getId());
     }
