@@ -1,4 +1,4 @@
-package io.swagger.pet.store.tests.chapter4;
+package io.swagger.pet.store.tests.framework.tests;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
@@ -12,6 +12,6 @@ public class TestUtils {
 
     private static AtomicLong createAtomicId() {
         int baseId = new Random(System.currentTimeMillis()).nextInt(1000000) + 20000;
-        return new AtomicLong((long) baseId);
+        return new AtomicLong(baseId);
     }
 }

@@ -1,5 +1,7 @@
 package io.swagger.pet.store.tests.framework.base;
 
+import io.qameta.allure.Step;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.ObjectMapperConfig;
@@ -22,19 +24,20 @@ public abstract class BaseEndpoint<Endpoint, Model> {
 
     protected abstract Type getModelType();
 
+    @Step
     public abstract Endpoint sendRequest();
 
     protected abstract int getSuccessStatusCode();
 
     protected RequestSpecBuilder getRequestSpecBuilder() {
         return new RequestSpecBuilder().setConfig(RestAssured.config()
-                .objectMapperConfig(ObjectMapperConfig.objectMapperConfig().defaultObjectMapper(GsonObjectMapper.gson()))
-                .redirect(RedirectConfig.redirectConfig().followRedirects(false))
-                .sslConfig(SSLConfig.sslConfig().relaxedHTTPSValidation()))
-                .setBaseUri("http://petstore.swagger.io:80/v2")
+                        .objectMapperConfig(ObjectMapperConfig.objectMapperConfig().defaultObjectMapper(GsonObjectMapper.gson()))
+                        .redirect(RedirectConfig.redirectConfig().followRedirects(false))
+                        .sslConfig(SSLConfig.sslConfig().relaxedHTTPSValidation()))
+                .setBaseUri("https://petstore.swagger.io/v2")
                 .addFilters(Arrays.asList(
                         new RequestLoggingFilter(),
-                        new ResponseLoggingFilter()));
+                        new ResponseLoggingFilter(), new AllureRestAssured()));
     }
 
     public Endpoint assertRequestSuccess() {

@@ -1,48 +1,48 @@
 package io.swagger.pet.store.tests.framework.tests;
 
-import io.swagger.pet.store.tests.chapter4.TestUtils;
 import io.swagger.pet.store.tests.framework.methods.pet.GetPetApiMethod;
 import io.swagger.pet.store.tests.framework.methods.pet.PostPetApiMethod;
 import io.swagger.petstore.model.Category;
 import io.swagger.petstore.model.Pet;
+import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
+import java.util.List;
 
 import static io.swagger.petstore.model.Pet.StatusEnum.AVAILABLE;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class PetTest {
 
-    @Test
-    public void getPetTest() {
-        GetPetApiMethod getPetApiMethod = new GetPetApiMethod();
-        getPetApiMethod.setPetId("123");
-        getPetApiMethod.sendRequest();
-        getPetApiMethod.assertRequestSuccess();
-        getPetApiMethod.assertStatusCode(200);
-        Pet pet = getPetApiMethod.getResponseModel();
+    //https://petstore.swagger.io/
 
-        assertThat(pet.getId()).isEqualTo(123L);
+    @Test
+    public void shouldGetPetWhenPetIsAvailable() {
+        Pet pet = new GetPetApiMethod()
+                .petId("123")
+                .sendRequest()
+                .assertRequestSuccess()
+                .getResponseModel();
+
+        Assertions.assertThat(pet.getId()).as("Pet with specified ID does not exist").isEqualTo(123L);
     }
 
     @Test
-    public void postPetTest() {
-        Pet petToBeAdded = getTestPet();
+    public void shouldCreatePetWhenCallPetEndpoint() {
+        Pet petToBeAdded = createPet();
 
-        PostPetApiMethod postPetApiMethod = new PostPetApiMethod();
-        postPetApiMethod.setPet(petToBeAdded);
-        postPetApiMethod.sendRequest();
-        postPetApiMethod.assertRequestSuccess();
-        Pet createdPet = postPetApiMethod.getResponseModel();
+        Pet createdPet = new PostPetApiMethod()
+                .pet(petToBeAdded)
+                .sendRequest()
+                .assertRequestSuccess()
+                .getResponseModel();
 
-        assertThat(createdPet.getId()).isEqualTo(petToBeAdded.getId());
+        Assertions.assertThat(createdPet.getId()).as("Pet with specified id was not created").isEqualTo(petToBeAdded.getId());
     }
 
-    private Pet getTestPet() {
+    private Pet createPet() {
         return new Pet().id(TestUtils.nextId()).name("alex").status(AVAILABLE)
                 .category(new Category().id(TestUtils.nextId()).name("dog"))
-                .photoUrls(Arrays.asList("http://foo.bar.com/1"));
+                .photoUrls(List.of("http://foo.bar.com/1"));
     }
 
 }

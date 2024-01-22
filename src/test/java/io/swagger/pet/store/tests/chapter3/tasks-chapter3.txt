@@ -1,7 +1,0 @@
-Zadania:
-
-#1
-Wygeneruj klienta RestAssured dla opisu API dostępnego na https://petstore.swagger.io/v2/swagger.json
-
-#2
-Wykorzystując wygenerowany kod, napisz testy z rozdziału 1 i 2
